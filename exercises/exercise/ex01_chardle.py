@@ -25,7 +25,3 @@ if letter==name[3]:
     print(f"{letter} is found at index 3")
 if letter==name[4]:
     print(f"{letter} is found at index 4")
-
-
-
-
