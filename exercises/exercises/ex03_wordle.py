@@ -12,7 +12,7 @@ def contains_char(word:str, letter:str) -> bool:
     assert len(letter) == 1
     j: int = 0
     found = False
-    while j < len(word) and not found:
+    while j < len(word):
         if word[j] == letter: 
             found = True
         else:  
@@ -22,19 +22,18 @@ def contains_char(word:str, letter:str) -> bool:
 
 def emojified(guess: str, secret: str) -> str:
     """Test for green, yellow, or white box codification"""
+    assert len(guess) == len(secret)
     i: int = 0
     results: str = ""
-    secret: str = "codes"
-    assert len(guess) == len(secret)
     while i < len(secret):
-        if guess[i] == secret[i]:
-            results += GREEN_BOX
-        else:
-            if contains_char(secret, guess[i]):
-                results += YELLOW_BOX
+        if contains_char(secret, guess[i]):
+            if guess[i] == secret[i]:
+                results += GREEN_BOX
             else: 
-                results += WHITE_BOX
-            i += 1
+                results += YELLOW_BOX
+        else: 
+            results += WHITE_BOX  
+        i += 1 
     return results
 
 def input_guess(expected_length: int) -> str:
@@ -50,7 +49,7 @@ def main() -> None:
 secret: str = "codes"
 num_turns: int = 6 
 turn: int = 1
-won: bool = False
+won = bool = False
 
 #Game loop
 while turn <= num_turns and not won:
@@ -60,7 +59,6 @@ while turn <= num_turns and not won:
     print(result)
     if guess == secret: 
         won = True
-        exit()
     turn += 1
 
 #End of game
@@ -71,4 +69,3 @@ else:
 
 if __name__ == "__main__":
     main()
-    
