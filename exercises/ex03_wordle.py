@@ -8,7 +8,7 @@ YELLOW_BOX: str = "\U0001F7E8"
 
 
 def contains_char(word:str, letter:str) -> bool:
-    """"Returns true if single character is found at any index"""
+    """"Returns true if single character is found at any index."""
     assert len(letter) == 1
     j: int = 0
     found = False
@@ -21,7 +21,7 @@ def contains_char(word:str, letter:str) -> bool:
     return found 
 
 def emojified(guess: str, secret: str) -> str:
-    """Test for green, yellow, or white box codification"""
+    """Test for green, yellow, or white box codification."""
     i: int = 0
     results: str = ""
     secret: str = "codes"
@@ -34,11 +34,11 @@ def emojified(guess: str, secret: str) -> str:
                 results += YELLOW_BOX
             else: 
                 results += WHITE_BOX
-            i += 1
+        i += 1
     return results
 
 def input_guess(expected_length: int) -> str:
-    """Test for expected length of guess"""
+    """Test for expected length of guess."""
     guess: str = input(f"Enter a {expected_length} character word: ")
     while len(guess) != expected_length: 
         guess = str(input(f"That wasn't {expected_length} chars! Try again: "))
@@ -46,29 +46,28 @@ def input_guess(expected_length: int) -> str:
 
 def main() -> None: 
     """"The entrypoint of the program and main game loop."""
-# Define game state variabes
-secret: str = "codes"
-num_turns: int = 6 
-turn: int = 1
-won: bool = False
+    # Define game state variabes
+    secret: str = "codes"
+    num_turns: int = 6 
+    turn: int = 1
+    won: bool = False
 
-#Game loop
-while turn <= num_turns and not won:
-    print(f"=== Turn {turn}/{num_turns} ===")
-    guess = input_guess(len(secret))
-    result = emojified(guess, secret)
-    print(result)
-    if guess == secret: 
-        won = True
-        exit()
-    turn += 1
+    #Game loop
+    while turn <= num_turns and not won:
+        print(f"=== Turn {turn}/{num_turns} ===")
+        guess = input_guess(len(secret))
+        result = emojified(guess, secret)
+        print(result)
+        if guess == secret: 
+            won = True
+            break
+        turn += 1
 
-#End of game
-if won: 
-    print(f"You won in {turn-1}/{num_turns} turns!")
-else:
-    print(F"X/6 - Sorry, try again tomorrow!")
+    #End of game
+    if won: 
+        print(f"You won in {turn-1}/{num_turns} turns!")
+    else:
+        print(F"X/6 - Sorry, try again tomorrow!")
 
 if __name__ == "__main__":
     main()
-    
